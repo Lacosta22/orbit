@@ -74,7 +74,7 @@ function displayCalendar(whichMonth) {
    // display calendar if it's not already visible  
 }
 function selectDate(event) {
-    if (event === undefined) { // get caller in IE8
+    if (event === undefined) { // get caller element in IE8
         event = window.event;
     }
     var callerElement = event.target || event.srcElement;
@@ -92,7 +92,19 @@ function selectDate(event) {
         return false;
     }
     document.getElementById("tripDate").value = dateObject.toLocaleDateString();
+    hideCalendar();
 }
+
+
+
+// hideCalendar()
+function hideCalendar() {
+    document.getElementById("cal").style.display = "none";
+}
+
+
+
+
 
 function createEventListeners() {
     var dateField = document.getElementById("tripDate");
@@ -115,5 +127,11 @@ if (window.addEventListener) {
         for (var i = 0; i < dateCells.length; i++) {
             dateCells[i].attachEvent("onclick", selectDate);
         }
+    }
+    var closeButton = document.getElementById("close");
+    if (closeButton.addEventListener) {
+        closeButton.addEventListener("click", hideCalendar, false);
+    } else if (closeButton.attachEvent) {
+        closeButton.attachEvent("onclick", hideCalendar);
     }
 }
