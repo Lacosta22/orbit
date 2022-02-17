@@ -74,13 +74,13 @@ function displayCalendar(whichMonth) {
    // display calendar if it's not already visible  
 }
 function selectDate(event) {
-    if (event === undefined) { // get caller element in IE8
-       event = window.event;
+    if (event === undefined) { // get caller in IE8
+        event = window.event
     }
     var callerElement = event.target || event.srcElement;
     if (callerElement.innerHTML === "") {
-        // cell contains no date, so don’t close the calendar
-        document.getElementById("cal").style.display = "block";
+        // cell contains no date, so don't close the calendar
+        document.getElementById("cal").style.display = "block"
         return false;
     }
     dateObject.setDate(callerElement.innerHTML);
@@ -93,6 +93,7 @@ function selectDate(event) {
     }
     document.getElementById("tripDate").value = dateObject.toLocaleDateString();
 }
+
 function createEventListeners() {
     var dateField = document.getElementById("tripDate");
         if (dateField.addEventListener) {
@@ -105,12 +106,14 @@ if (window.addEventListener) {
     window.addEventListener("load", createEventListeners, false);
 } else if (window.attachEvent) {
     window.attachEvent("onload", createEventListeners);
-var dateCells = document.getElementsByTagName("td");
-if (dateCells[0].addEventListener) {
-    for (var i = 0; i < dateCells.length; i++) {
-        dateCells[i].addEventListener("click", selectedDate, false);
+    var dateCells = document.getElementsByTagName("td");
+    if (dateCells[0].addEventListener) {
+        for (var i = 0; i < dateCells.length; i++) {
+            dateCells[i].addEventListener("click", selectDate, false);
+        }
+    } else if (dateCells[0].attachEvent) {
+        for (var i = 0; i < dateCells.length; i++) {
+            dateCells[i].attachEvent("onclick", selectDate);
+        }
     }
-} else if (dateCells[0].attachEvent) {
-    for (var i = 0; i < dateCells.length; i++) {
-        dateCells[i].attachEvent("onclick", selectDate);
-    }
+}
