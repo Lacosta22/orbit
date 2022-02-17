@@ -75,12 +75,12 @@ function displayCalendar(whichMonth) {
 }
 function selectDate(event) {
     if (event === undefined) { // get caller in IE8
-        event = window.event
+        event = window.event;
     }
     var callerElement = event.target || event.srcElement;
     if (callerElement.innerHTML === "") {
         // cell contains no date, so don't close the calendar
-        document.getElementById("cal").style.display = "block"
+        document.getElementById("cal").style.display = "block";
         return false;
     }
     dateObject.setDate(callerElement.innerHTML);
