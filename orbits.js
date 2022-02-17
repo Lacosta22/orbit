@@ -101,10 +101,12 @@ function selectDate(event) {
 function hideCalendar() {
     document.getElementById("cal").style.display = "none";
 }
-
-
-
-
+function prevMo() {
+    displayCalendar(-1);
+    }
+function nextMo(){
+    displayCalendar(1);
+}
 
 function createEventListeners() {
     var dateField = document.getElementById("tripDate");
@@ -133,5 +135,14 @@ if (window.addEventListener) {
         closeButton.addEventListener("click", hideCalendar, false);
     } else if (closeButton.attachEvent) {
         closeButton.attachEvent("onclick", hideCalendar);
+    }
+    var prevLink = document.getElementById("prev");
+    var nextLink = document.getElementById("next");
+    if (prevLink.addEventListener) {
+        prevLink.addEventListener("click", prevMo, false);
+        nextLink.addEventListener("click", nextMo, false);
+    } else if (prevLink.attachEvent) {
+        prevLink.attachEvent("onclick", prevMo);
+        nextLink.attachEvent("onclick", nextMo);
     }
 }
